@@ -1,10 +1,38 @@
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Hotels from "./pages/Hotels";
+import MyBookings from "./pages/MyBookings";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
-    <div style={{ padding: "20px", color: "white" }}>
-      <h1>Hotel Booking App 🏨</h1>
-      <p>React + Vite is working!</p>
-    </div>
-  )
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Hotels />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/bookings"
+        element={
+          <ProtectedRoute>
+            <MyBookings />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
+
+
+
