@@ -1,30 +1,47 @@
-import { getBookings, deleteBooking } from "../utils/bookingStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function MyBookings() {
-  const [bookings, setBookings] = useState(getBookings());
+const MyBookings = () => {
+  const [bookings, setBookings] = useState([]);
 
-  const cancelBooking = (id) => {
-    deleteBooking(id);
-    setBookings(getBookings());
+  // Load bookings on page load
+  useEffect(() => {
+    const storedBookings =
+      JSON.parse(localStorage.getItem("bookings")) || [];
+    setBookings(storedBookings);
+  }, []);
+
+  // ✅ Cancel booking
+  const handleCancel = (id) => {
+    const updatedBookings = bookings.filter(
+      (booking) => booking.id !== id
+    );
+
+    setBookings(updatedBookings);
+    localStorage.setItem("bookings", JSON.stringify(updatedBookings));
   };
 
   return (
-    <div className="page">
+    <div>
       <h1>My Bookings</h1>
 
-      {bookings.length === 0 && <p>No bookings yet.</p>}
+      {bookings.length === 0 && <p>No bookings found</p>}
 
-      {bookings.map((b) => (
-        <div key={b.id} style={{ border: "1px solid gray", padding: "10px", marginBottom: "10px" }}>
-          <h3>{b.name}</h3>
-          <p>City: {b.city}</p>
-          <p>Price: ₹{b.price}</p>
-          <p>Booked On: {b.date}</p>
+      {bookings.map((booking) => (
+        <div key={booking.id} className="booking-card">
+          <h2>{booking.hotelName}</h2>
+          <p>City: {booking.city}</p>
+          <p>Price: ₹{booking.price}</p>
+          <p>Booked On: {booking.bookedOn}</p>
 
-          <button onClick={() => cancelBooking(b.id)}>Cancel</button>
+          {/* ✅ Cancel Button */}
+          <button onClick={() => handleCancel(booking.id)}>
+            Cancel
+          </button>
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default MyBookings;
+
