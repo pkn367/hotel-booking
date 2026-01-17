@@ -22,6 +22,29 @@ export default function Hotels() {
   const [maxPrice, setMaxPrice] = useState(5000);
   const [sortBy, setSortBy] = useState("");
 
+  const handleConfirmBooking = (hotel) => {
+    const newBooking = {
+      id: Date.now(),
+      hotelName: hotel.name,
+      city: hotel.city,
+      price: hotel.price,
+      bookedOn: new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+    };
+
+    const existingBookings =
+      JSON.parse(localStorage.getItem("bookings")) || [];
+
+    localStorage.setItem(
+      "bookings",
+      JSON.stringify([...existingBookings, newBooking])
+    );
+
+    alert("Booking Successful!");
+  };
 
   const searchHotels = () => {
     let results = hotelsData.filter(
@@ -43,17 +66,25 @@ export default function Hotels() {
 
 
   const bookHotel = (hotel) => {
-    const booking = {
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    bookings.push({
       id: Date.now(),
-      name: hotel.name,
+      hotelName: hotel.name,          // ✅ FIX 1
       city: hotel.city,
       price: hotel.price,
-      date: new Date().toLocaleDateString(),
-    };
+      rating: hotel.rating,           // ✅ FIX 2
+      bookedOn: new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+    });
 
-    saveBooking(booking);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
     alert("Hotel booked successfully!");
   };
+
 
   const logout = () => {
     localStorage.removeItem("token");

@@ -7,6 +7,25 @@ const HotelDetails = () => {
   const { id } = useParams();
 
   const hotel = hotels.find(h => h.id === Number(id));
+  const handleConfirmBooking = (hotel) => {
+    const booking = {
+      id: Date.now(),
+      hotelName: hotel.name,     // ✅ HOTEL NAME
+      city: hotel.city,
+      price: hotel.price,
+      bookedOn: new Date().toLocaleDateString("en-IN"), // ✅ DATE
+    };
+
+    const existingBookings =
+      JSON.parse(localStorage.getItem("bookings")) || [];
+
+    localStorage.setItem(
+      "bookings",
+      JSON.stringify([...existingBookings, booking])
+    );
+
+    alert("Booking successful!");
+  };
 
   if (!hotel) {
     return <h2>Hotel not found</h2>;
