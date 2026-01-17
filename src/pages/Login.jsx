@@ -1,31 +1,38 @@
-import { useState } from "react";
-import { loginUser } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  async function handleLogin(e) {
-    e.preventDefault();
-    const data = await loginUser(email, password);
-
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      navigate("/");
-    } else {
-      alert("Login failed");
-    }
-  }
+  const handleLogin = () => {
+    // simulate JWT token
+    localStorage.setItem("token", "dummy-jwt-token");
+    alert("Logged in!");
+    navigate("/hotels");
+  };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-      <button>Login</button>
-    </form>
+    <div style={container}>
+      <h2>Login Page</h2>
+      <button onClick={handleLogin}>Login</button>
+      <p onClick={() => navigate("/signup")} style={link}>
+        New user? Signup
+      </p>
+    </div>
   );
 }
 
+const container = {
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "#111",
+  color: "white",
+};
+
+const link = {
+  marginTop: "10px",
+  cursor: "pointer",
+  color: "lightblue",
+};
