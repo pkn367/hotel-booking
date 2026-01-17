@@ -86,6 +86,7 @@ export default function Hotels() {
   };
 
 
+
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -107,7 +108,7 @@ export default function Hotels() {
         <input
           type="range"
           min="1000"
-          max="5000"
+          max="15000"
           value={maxPrice}
           onChange={(e) => setMaxPrice(Number(e.target.value))}
         />

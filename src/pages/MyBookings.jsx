@@ -48,22 +48,22 @@ const styles = {
   container: {
     padding: "40px",
     minHeight: "100vh",
-    backgroundColor: "#0f172a",
-    color: "#e5e7eb",
+    backgroundColor: "#111",
+    color: "#fff",
   },
   heading: {
     marginBottom: "30px",
   },
   card: {
-    border: "1px solid #915757",
+    border: "1px solid #555",
     padding: "25px",
     marginBottom: "25px",
     borderRadius: "12px",
-    backgroundColor: "#1e293b",
+    backgroundColor: "#1e1e1e",
   },
   hotelName: {
     marginBottom: "12px",
-    color: "#facc15",
+    color: "#ffd700",
     fontSize: "22px",
   },
   cancelBtn: {
@@ -78,4 +78,3 @@ const styles = {
 };
 
 export default MyBookings;
-
