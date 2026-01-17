@@ -48,22 +48,22 @@ const styles = {
   container: {
     padding: "40px",
     minHeight: "100vh",
-    backgroundColor: "#111",
-    color: "#dbd1d1",
+    backgroundColor: "#0f172a",
+    color: "#e5e7eb",
   },
   heading: {
     marginBottom: "30px",
   },
   card: {
-    border: "1px solid #555",
+    border: "1px solid #915757",
     padding: "25px",
     marginBottom: "25px",
     borderRadius: "12px",
-    backgroundColor: "#ded5d5",
+    backgroundColor: "#1e293b",
   },
   hotelName: {
     marginBottom: "12px",
-    color: "#ffd700",
+    color: "#facc15",
     fontSize: "22px",
   },
   cancelBtn: {
